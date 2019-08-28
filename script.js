@@ -68,7 +68,17 @@ console.log('Расходы:', expensesAmount);
 let budgetMonth = money - expensesAmount;
 
 // Доход за день (округлив в меньшую сторону)
-let budgetDay =  Math.floor(budgetMonth / 30);
+function accountDay() {
+    let dayMoney = Math.floor(budgetMonth / 30);
+
+    if (dayMoney > 0) {
+        return dayMoney;
+    } else {
+        return console.log('Что то пошло не так');
+    }
+} 
+
+let budgetDay = accountDay();
 
 // Функция возвращающая накопления за месяц
 let getAccumulatedMonth = function() {
@@ -79,15 +89,17 @@ let capital = getAccumulatedMonth(); // Накопления
 console.log('Накопления:', capital);
 
 // Функция возвращающаяя период достижения цели
-let getTargetMonth = function() {
-    return Math.floor(mission / capital);
-};
+function getTargetMonth() {
+    let monthAmount = Math.floor(mission / capital);
 
-if (getTargetMonth() > 0 && getTargetMonth() !== Infinity) {
-    console.log('Цель будет достигнута за:', getTargetMonth());
-} else if (getTargetMonth() <= 0 || getTargetMonth() == Infinity) {
-    console.log('Цель не будет достигнута');
+    if (monthAmount > 0) {
+        return console.log('Цель будет достигнута за: ' + monthAmount + ' месяцев!');
+    } else {
+        return console.log('Цель не будет достигнута');
+    }
 }
+
+let achievinGoal = getTargetMonth();
 
 // Функции показывающая тип данных
 let showTypeof = function(data) {
@@ -106,7 +118,7 @@ let getStatusIncome = function() {
         return ('Средний уровень дохода');
     } else if (budgetDay > 0 && budgetDay <= 300) {
         return ('Низкий уровень дохода');
-    } else if (budgetDay <= 0) {
+    } else {
         return ('Что то пошло не так');
     }
 };
