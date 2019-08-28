@@ -15,7 +15,7 @@ console.log('Необходимо накопить:', mission);
 //     }
 // };
 
-let start = function(){
+let start = function() {
     do{
         money = prompt('Ваш месячный доход?', 50000); // Доход в месяц
         console.log('money: ', money);
@@ -51,8 +51,9 @@ let getExpensesMonth = function() {
         
         sum += +prompt('Во сколько это обойдется?', 2500);
 
-        while(isNaN(sum) || sum === '' || sum === null){
-            sum = prompt('Ваш месячный доход?', 50000);
+        // Проверка на неверные значения
+        while(isNaN(sum) || sum == '' || sum === null){
+            sum = +prompt('Во сколько это обойдется?', 2500);
             console.log('sum: ', sum);
         }
     }  
@@ -82,7 +83,11 @@ let getTargetMonth = function() {
     return Math.floor(mission / capital);
 };
 
-console.log('Период накопления:', getTargetMonth());
+if (getTargetMonth() > 0 && getTargetMonth() !== Infinity) {
+    console.log('Цель будет достигнута за:', getTargetMonth());
+} else if (getTargetMonth() <= 0 || getTargetMonth() == Infinity) {
+    console.log('Цель не будет достигнута');
+}
 
 // Функции показывающая тип данных
 let showTypeof = function(data) {
